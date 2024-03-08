@@ -20,17 +20,18 @@ use Illuminate\Support\Facades\Route;
 
 
 // Public routes
-Route::post('/register', [AuthController::class, 'register']);
-Route::post('/login', [AuthController::class, 'login']);
+   Route::post('/register', [AuthController::class, 'register']);
+   Route::post('/login', [AuthController::class, 'login']);
 
 
 
+   Route::post('/posts/image', [PostController::class, 'addPhoto']);
 
 
 
 
 // Protected routes
-Route::group(['middleware' => ['auth:sanctum']], function () {
+// Route::group(['middleware' => ['auth:sanctum']], function () {
 	
 	Route::get('/posts', [PostController::class, 'index']);
     Route::post('/posts', [PostController::class, 'store']);
@@ -38,7 +39,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/posts/{id}', [PostController::class, 'destroy']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
-});
+// });
 
 
 

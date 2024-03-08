@@ -32,15 +32,15 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-         if ($request->is('api/*')) {
-                return response()->json([
-                    'status'  => 401,
-                    'message' => 'Not authenticated'
-                ],401);
+        //  if ($request->is('api/*')) {
+        //         return response()->json([
+        //             'status'  => 401,
+        //             'message' => 'Not authenticated'
+        //         ],401);
 
-            }
+        //     }
         
 
-        return parent::render($request, $exception);
+        // return parent::render($request, $exception);
     }
 }

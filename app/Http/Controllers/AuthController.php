@@ -11,7 +11,7 @@ use Validator;
 
 class AuthController extends Controller
 {
-    private $secretKey='X.XSJDLKStQBDyw1nIePtYNn3988983t3yBeYCnvG8OxzZ9989I8u+Rq0r0=';
+     private $secretKey='X.XSJDLKStQBDyw1nIePtYNn3988983t3yBeYCnvG8OxzZ9989I8u+Rq0r0=';
 
    
      public function register(Request $request) {
@@ -34,12 +34,10 @@ class AuthController extends Controller
             'password' => bcrypt($fields['password'])
         ]);
 
-        $token = $user->createToken($this->secretKey)->plainTextToken;
 
         $response = [
             'user'    => $user,
             'message' => 'your account was created successfully !',
-            'token'   => $token
         ];
 
         return response($response, 201);

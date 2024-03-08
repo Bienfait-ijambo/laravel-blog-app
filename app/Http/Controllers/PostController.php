@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Post;
 use Validator;
 use DB;
+use url;
 class PostController extends Controller
 {
     /**
@@ -96,6 +98,37 @@ class PostController extends Controller
          Post::destroy($id);
          return response(['message'=>'post deleted !'],201);
     }
+
+
+
+    function addPhoto(Request $request)
+    {
+
+
+        if ($request->hasFile('image')) {
+           
+
+            $image = $request->file('image');
+
+            $input['file'] = time() . '.' . $image->getClientOriginalExtension();
+            // Corrected code
+            Storage::disk('public')
+            ->put('images/' . $input['file'], file_get_contents($image), 'public');
+
+
+            $baseUrl= url('/');
+
+            $imageURL= $baseUrl.'/storage/images/'.$input['file'];
+
+            Post::where('id',$request->postId)
+                ->update(['image' =>$imageURL]);
+
+
+            return response(['message'=>'image uploaded !'],201);
+        }
+
+  }
+
 
     
 
